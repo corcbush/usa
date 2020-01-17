@@ -112,7 +112,83 @@ end;
 /
 
 
+set serveroutput on
+/
+----HW-1 Task-1 ----
+declare 
+v_row constant number :=7;
+v_col constant number :=7;
+begin
+    for i in 1..v_row
+    loop
+        for j in 1..v_col
+        loop
+            if j = i or j = (v_col+1-i)
+                then dbms_output.put('*');
+            else
+                dbms_output.put(' ');
+            end if;
+        end loop;
+        dbms_output.put_line('');
+    end loop;
+end;
 
+/
+
+-----HW-1 Task-2--------
+declare 
+v_row constant number :=7;
+v_col constant number :=7;
+begin
+    for i in 1..v_row
+    loop
+        for j in 1..v_col
+        loop
+            if (j >= i and j <= v_col+1-i) or (j >= v_col+1-i and j <= i)
+                then dbms_output.put('*');
+            else
+                dbms_output.put(' ');
+            end if;
+        end loop;
+        dbms_output.put_line('');
+    end loop;
+end;     
+/
+
+
+
+----- HW-2  Task-1 ---
+
+
+create or replace function net_salary(p_salary in number, p_comm in number) return number
+is
+begin
+    return p_salary-p_salary*nvl(p_comm, 0);
+end;
+/
+select 
+last_name, salary, commission_pct, net_salary(p_salary=>salary, p_comm=>commission_pct) as "Net Salary"
+from employees;
+/
+
+----HW-2  Task-2 ------
+
+create or replace function check_pifagor_rules(n1 number, n2 number, n3 number) return VARCHAR2
+is 
+begin 
+    if (n1*n1 + n2*n2 = n3*n3) then 
+         return 'true';
+    elsif (n1*n1 + n3*n3 = n2*n2) then 
+         return 'true';
+    elsif (n2*n2 + n3*n3 = n1*n1) then 
+         return 'true';
+    end if;
+    return 'false';
+end;
+/
+select check_pifagor_rules(3, 4, 5) from dual;  --true
+select check_pifagor_rules(8, 10, 6) from dual;  --true
+select check_pifagor_rules(3, 5, 7) from dual;  --false
 
 
 
