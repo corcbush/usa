@@ -94,8 +94,22 @@ begin
 end;
 /
 select check_pifagor_rules(10, 12, 11) from dual;
-
-
+/
+begin
+    for i in 1..7
+    loop
+        for j in 1..7
+        loop
+            if (j >= i and j <= 8-i) or (j >= 8-i and j <= i)
+                then dbms_output.put('*');
+            else
+                dbms_output.put(' ');
+            end if;
+        end loop;
+        dbms_output.put_line('');
+    end loop;
+end;       
+/
 
 
 
