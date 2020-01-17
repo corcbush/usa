@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Reswponsive Web Design</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+*{box-sizing: border-box;}
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+
+  .header,.content1,.content2,.nav,.footer{
+     padding: 30px;
+     font-size: 25px;
+     float: left;
+     min-height: 30vh;
+     text-align: center;
+
+  }
+
+  .header{ background-color: lime; }
+  .content1{ background-color: yellow }
+  .content2{ background-color: turquoise; }
+  .nav{background-color: brown;}
+  .footer{background-color: green;}
+
+  @media only screen and(max-width: 1024)
+</style>
+</head>
+<body>
+<div class="col-12 header">Header</div>
+<div class="col-3 content1">Content1</div>
+<div class="col-4 content2">Content2</div>
+<div class="col-5 nav">Nav</div>
+<div class="col-12 footer">Footer</div>
+
+</body>
+</html>
