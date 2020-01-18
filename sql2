@@ -1,0 +1,143 @@
+--- CHAPTER 1
+select * from employees; -- Basic select statement < comment >
+
+select last_name, first_name, salary /*select list*/ from employees; -- projection
+
+select 1, ' and ' from employees; -- literal
+
+select last_name || first_name from employees;  -- concat (double pipe)
+
+select last_name || ' and ' || first_name from employees;
+
+select last_name || ' ' || first_name from employees;
+
+select employee_id, salary*12 from employees; -- expression 
+
+select employee_id as emp#, salary*12 as "Annual salary" from employees; -- alias
+select employee_id emp#, salary*12 "Annual salary" from employees; -- alias
+
+/*
+a..z
+0..9
+$#_
+*/
+
+select last_name, commission_pct from employees;
+
+select last_name, commission_pct, salary as gross, salary - salary*commission_pct as net 
+from employees;
+
+select 'Khazar' from dual;
+
+select 152485+1542/1524 from dual;
+
+select user from dual;
+
+select sysdate from dual;
+
+select sysdate from employees; --count of rows ? - 107
+
+select * from dual;
+
+select 'Ali''s cat' from dual;
+
+select q'[Ali's cat]' from dual;
+
+select salary from employees; --rowcount = 107
+
+select distinct salary from employees; --rowcount = 58
+
+select unique salary from employees; --rowcount = 58
+
+select distinct last_name, salary from employees; --rowcount = 107
+--------------------------------
+
+
+--- CHAPTER 2 (WHERE)
+select last_name, salary, department_id from employees
+where department_id = 50; -- selection
+
+select last_name, salary, department_id from employees
+where department_id < 50;
+
+select last_name, salary, department_id from employees
+where department_id <> 50;
+
+select last_name, salary, department_id from employees
+where department_id != 50;
+
+select last_name, salary from employees
+where last_name ='King';
+
+select last_name, salary from employees
+where last_name  like 'K%'; 
+
+select last_name, salary from employees
+where last_name  like '%n'; 
+
+select last_name, salary from employees
+where last_name  like '%a%'; 
+
+select last_name, salary from employees
+where last_name  like '%n_'; 
+
+select last_name, salary from employees
+where salary in (24000, 17000, 2100);
+
+select last_name, salary from employees
+where salary not in (24000, 17000, 2100);
+
+select last_name, department_id from employees
+where department_id in (10, 20, 30);  --9
+
+select last_name, department_id from employees
+where department_id not in (10, 20, 30);  --97        97 + 9 = 106 - 107= 1
+
+select last_name, department_id from employees
+where department_id = null;  -- not right
+
+select last_name, department_id from employees
+where department_id is null;  -- right
+
+select last_name, department_id from employees
+where department_id not in (10, 20, 30) or department_id is null  ;  
+
+select * from employees
+where 1=1; --true
+
+select * from employees
+where 1=2;  --false
+
+select * from employees
+where 1=null;  -- null, unknown
+
+
+select * from employees
+where not 1=1;
+
+select * from employees
+where not 1=2;
+
+select * from employees
+where not 1=null;
+
+select last_name, salary from employees
+where salary between 3000 and 5000;  --salary [3000, 5000]
+
+select last_name, salary from employees
+where salary not between 3000 and 5000;
+
+
+select last_name, salary from employees
+where salary >= 3000  and  salary <= 5000; --between
+
+---------------------------------------------------
+
+select last_name, salary, department_id  from employees
+where last_name like 'S%' and  (salary< 13000 or department_id >50); 
+--A AND B OR C
+--A * (B + C)
+select last_name, salary, department_id  from employees
+where last_name like 'S%' and  salary < 13000 or department_id >50; 
+
+--programmer.karimov@gmail.com
