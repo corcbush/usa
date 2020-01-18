@@ -1,0 +1,670 @@
+---DATA TYPES---
+DECLARE 
+num1 INTEGER; 
+num2 REAL; 
+num3 DOUBLE PRECISION; 
+BEGIN null; 
+END; 
+/
+
+------------
+DECLARE num1 INTEGER; 
+num2 REAL; 
+num3 DOUBLE PRECISION; 
+BEGIN null; 
+END; 
+/
+
+----------
+
+
+---VARIABLES---
+
+DECLARE a integer := 10; 
+b integer := 20; 
+c integer; 
+f real; 
+BEGIN c := a + b; 
+dbms_output.put_line('Value of c: ' || c); 
+f := 70.0/3.0; 
+dbms_output.put_line('Value of f: ' || f); 
+END; 
+/
+
+--------------
+
+DECLARE 
+-- Global variables 
+num1 number := 95; 
+num2 number := 85; 
+BEGIN 
+dbms_output.put_line('Outer Variable num1: ' || num1); 
+dbms_output.put_line('Outer Variable num2: ' || num2); 
+DECLARE 
+-- Local variables 
+num1 number := 195; 
+num2 number := 185; 
+BEGIN 
+dbms_output.put_line('Inner Variable num1: ' || num1); 
+dbms_output.put_line('Inner Variable num2: ' || num2); 
+END; 
+END; 
+/
+
+
+----------------
+
+DECLARE 
+c_id customers.id%type := 1; 
+c_name customers.name%type; 
+c_addr customers.address%type; 
+c_sal customers.salary%type; 
+BEGIN 
+SELECT name, address, salary INTO c_name, c_addr, c_sal 
+FROM customers WHERE id = c_id; 
+dbms_output.put_line ('Customer ' ||c_name || ' from ' || c_addr || ' earns ' || c_sal); 
+END; 
+/
+
+
+-------------
+
+
+---CONSTANT---
+PI CONSTANT NUMBER := 3.141592654; 
+DECLARE 
+-- constant declaration 
+pi constant number := 3.141592654; 
+-- other declarations 
+radius number(5,2); 
+dia number(5,2); 
+circumference number(7, 2); 
+area number (10, 2); 
+BEGIN 
+-- processing radius := 9.5; 
+dia := radius * 2; 
+circumference := 2.0 * pi * radius; 
+area := pi * radius * radius; 
+-- output 
+dbms_output.put_line('Radius: ' || radius); 
+dbms_output.put_line('Diameter: ' || dia); 
+dbms_output.put_line('Circumference: ' || circumference); 
+dbms_output.put_line('Area: ' || area); 
+END; 
+/
+
+----OPERATORS----
+
+
+BEGIN 
+dbms_output.put_line( 10 + 5); 
+dbms_output.put_line( 10 - 5); 
+dbms_output.put_line( 10 * 5); 
+dbms_output.put_line( 10 / 5); 
+dbms_output.put_line( 10 ** 5); 
+END; 
+/
+
+
+
+------------------
+
+DECLARE a number (2) := 21; 
+b number (2) := 10; 
+BEGIN IF (a = b) then dbms_output.put_line('Line 1 - a is equal to b'); 
+ELSE dbms_output.put_line('Line 1 - a is not equal to b'); 
+END IF;
+IF (a < b) then dbms_output.put_line('Line 2 - a is less than b'); 
+ELSE dbms_output.put_line('Line 2 - a is not less than b'); 
+END IF; 
+IF ( a > b ) THEN dbms_output.put_line('Line 3 - a is greater than b'); 
+ELSE dbms_output.put_line('Line 3 - a is not greater than b'); 
+END IF; 
+-- Lets change value of a and b a := 5; 
+b := 20; 
+IF ( a <= b ) THEN dbms_output.put_line('Line 4 - a is either equal or less than b'); 
+END IF; 
+IF ( b >= a ) THEN dbms_output.put_line('Line 5 - b is either equal or greater than a'); 
+END IF; 
+IF ( a <> b ) THEN dbms_output.put_line('Line 6 - a is not equal to b'); 
+ELSE dbms_output.put_line('Line 6 - a is equal to b'); 
+END IF; 
+END; 
+/
+
+-----------------
+
+DECLARE 
+PROCEDURE compare (value varchar2, pattern varchar2 ) is 
+BEGIN 
+IF value LIKE pattern THEN 
+dbms_output.put_line ('True'); 
+ELSE dbms_output.put_line ('False'); 
+END IF; 
+END; 
+BEGIN compare('Zara Ali', 'Z%A_i'); 
+compare('Nuha Ali', 'Z%A_i'); 
+END; 
+/
+
+----------------
+
+DECLARE x number(2) := 10; 
+BEGIN 
+IF (x between 5 and 20) THEN dbms_output.put_line('True'); 
+ELSE dbms_output.put_line('False');
+END IF; 
+IF (x BETWEEN 5 AND 10) THEN dbms_output.put_line('True');
+ELSE dbms_output.put_line('False'); 
+END IF; 
+IF (x BETWEEN 11 AND 20) THEN dbms_output.put_line('True'); 
+ELSE dbms_output.put_line('False'); 
+END IF; 
+END; 
+/
+
+
+-------------------------
+
+
+DECLARE 
+letter varchar2(1) := 'm'; 
+BEGIN IF (letter in ('a', 'b', 'c')) THEN dbms_output.put_line('True'); 
+ELSE dbms_output.put_line('False'); 
+END IF; 
+IF (letter in ('m', 'n', 'o')) THEN dbms_output.put_line('True'); 
+ELSE dbms_output.put_line('False'); 
+END IF; 
+IF (letter is null) THEN dbms_output.put_line('True'); 
+ELSE dbms_output.put_line('False'); 
+END IF; 
+END; 
+/
+
+
+----------------------------------
+
+DECLARE 
+a boolean := true; 
+b boolean := false; 
+BEGIN 
+IF (a AND b) THEN dbms_output.put_line('Line 1 - Condition is true'); 
+END IF; 
+IF (a OR b) THEN dbms_output.put_line('Line 2 - Condition is true'); 
+END IF; IF (NOT a) THEN dbms_output.put_line('Line 3 - a is not true'); 
+ELSE dbms_output.put_line('Line 3 - a is true'); 
+END IF; IF (NOT b) THEN dbms_output.put_line('Line 4 - b is not true'); 
+ELSE dbms_output.put_line('Line 4 - b is true'); 
+END IF; 
+END; 
+/
+
+
+------------------------------
+
+DECLARE 
+a number(2) := 20; 
+b number(2) := 10; 
+c number(2) := 15; 
+d number(2) := 5; 
+e number(2) ; 
+BEGIN e := (a + b) * c / d; -- ( 30 * 15 ) / 5 
+dbms_output.put_line('Value of (a + b) * c / d is : '|| e ); 
+e := ((a + b) * c) / d; -- (30 * 15 ) / 5 
+dbms_output.put_line('Value of ((a + b) * c) / d is : ' || e ); 
+e := (a + b) * (c / d); -- (30) * (15/5) 
+dbms_output.put_line('Value of (a + b) * (c / d) is : '|| e ); 
+e := a + (b * c) / d; -- 20 + (150/5) 
+dbms_output.put_line('Value of a + (b * c) / d is : ' || e ); 
+END; 
+/
+
+----Conditions------
+
+
+DECLARE 
+a number(2) := 10; 
+BEGIN a:= 10; 
+-- check the boolean condition using if statement 
+IF( a < 20 ) THEN 
+-- if condition is true then print the following 
+dbms_output.put_line('a is less than 20 ' ); 
+END IF; 
+dbms_output.put_line('value of a is : ' || a); 
+END; 
+/
+
+
+
+
+-----------------------
+
+DECLARE 
+a number(3) := 100; 
+BEGIN 
+-- check the boolean condition using if statement 
+IF( a < 20 ) THEN 
+-- if condition is true then print the following 
+dbms_output.put_line('a is less than 20 ' ); 
+ELSE dbms_output.put_line('a is not less than 20 ' ); 
+END IF; 
+dbms_output.put_line('value of a is : ' || a); 
+END; 
+/
+
+--------------------------
+
+DECLARE 
+a number(3) := 100; 
+BEGIN IF ( a = 10 ) THEN 
+dbms_output.put_line('Value of a is 10' ); 
+ELSIF ( a = 20 ) THEN 
+dbms_output.put_line('Value of a is 20' ); 
+ELSIF ( a = 30 ) THEN 
+dbms_output.put_line('Value of a is 30' ); 
+ELSE 
+dbms_output.put_line('None of the values is matching'); 
+END IF; 
+dbms_output.put_line('Exact value of a is: '|| a ); 
+END; 
+/
+
+
+-------------------------
+
+DECLARE 
+grade char(1) := 'A'; 
+BEGIN 
+CASE 
+grade when 'A' then 
+dbms_output.put_line('Excellent'); 
+when 'B' then dbms_output.put_line('Very good'); 
+when 'C' then dbms_output.put_line('Well done'); 
+when 'D' then dbms_output.put_line('You passed'); 
+when 'F' then dbms_output.put_line('Better try again'); 
+else dbms_output.put_line('No such grade'); 
+END CASE; 
+END; 
+/
+
+
+
+--------------------------
+
+DECLARE 
+grade char(1) := 'B'; 
+BEGIN 
+case 
+when grade = 'A' then dbms_output.put_line('Excellent'); 
+when grade = 'B' then dbms_output.put_line('Very good'); 
+when grade = 'C' then dbms_output.put_line('Well done'); 
+when grade = 'D' then dbms_output.put_line('You passed'); 
+when grade = 'F' then dbms_output.put_line('Better try again'); 
+else dbms_output.put_line('No such grade'); 
+end case;
+END; 
+/
+
+
+-----------------------
+
+
+DECLARE 
+a number(3) := 100; 
+b number(3) := 200; 
+BEGIN 
+-- check the boolean condition 
+IF( a = 100 ) THEN 
+-- if condition is true then check the following 
+IF( b = 200 ) THEN 
+-- if condition is true then print the following 
+dbms_output.put_line('Value of a is 100 and b is 200' ); 
+END IF; 
+END IF; 
+dbms_output.put_line('Exact value of a is : ' || a ); 
+dbms_output.put_line('Exact value of b is : ' || b ); 
+END; 
+/
+
+----LOOPS------
+
+DECLARE 
+x number := 10; 
+BEGIN 
+LOOP 
+dbms_output.put_line(x); 
+x := x + 10; 
+IF x > 50 THEN exit; 
+END IF; 
+END LOOP;
+-- after exit, control resumes here 
+dbms_output.put_line('After Exit x is: ' || x); 
+END; 
+/
+
+
+-------------------
+
+DECLARE 
+x number := 10; 
+BEGIN 
+LOOP 
+dbms_output.put_line(x); 
+x := x + 10; 
+exit WHEN x > 50; 
+END 
+LOOP; 
+-- after exit, control resumes here 
+dbms_output.put_line('After Exit x is: ' || x); 
+END; 
+/
+
+
+--------------------------
+
+DECLARE 
+a number(2) := 10; 
+BEGIN 
+WHILE a < 20 LOOP 
+dbms_output.put_line('value of a: ' || a); 
+a := a + 1; 
+END LOOP; 
+END; 
+/
+
+
+
+-------------------
+
+DECLARE 
+i number(3); 
+j number(3); 
+BEGIN 
+i := 2; 
+LOOP j:= 2; 
+LOOP 
+exit WHEN ((mod(i, j) = 0) or (j = i)); 
+j := j +1; 
+END LOOP; 
+IF (j = i ) THEN 
+dbms_output.put_line(i || ' is prime'); 
+END IF; 
+i := i + 1; 
+exit WHEN i = 50; 
+END LOOP; 
+END; 
+/
+
+
+------------------------
+
+
+DECLARE 
+i number(1); 
+j number(1); 
+BEGIN 
+<< outer_loop >> 
+FOR i IN 1..3 LOOP 
+<< inner_loop >> 
+FOR j IN 1..3 LOOP 
+dbms_output.put_line('i is: '|| i || ' and j is: ' || j); 
+END loop inner_loop; 
+END loop outer_loop; 
+END; 
+/
+
+
+---------------
+
+DECLARE 
+a number(2) := 10; 
+BEGIN 
+-- while loop execution 
+WHILE a < 20 LOOP 
+dbms_output.put_line ('value of a: ' || a); 
+a := a + 1; 
+IF a > 15 THEN 
+-- terminate the loop using the exit statement 
+EXIT; 
+END IF; 
+END LOOP; 
+END; 
+/
+
+
+
+---------------------------
+
+DECLARE 
+a number(2) := 10; 
+BEGIN 
+-- while loop execution 
+WHILE a < 20 LOOP
+dbms_output.put_line ('value of a: ' || a); 
+a := a + 1; 
+-- terminate the loop using the exit when statement 
+EXIT 
+WHEN a > 15; 
+END LOOP; 
+END; 
+/
+
+
+-------------
+
+DECLARE 
+a number(2) := 10; 
+BEGIN 
+-- while loop execution 
+WHILE a < 20 LOOP 
+dbms_output.put_line ('value of a: ' || a); 
+a := a + 1; 
+IF a = 15 THEN 
+-- skip the loop using the CONTINUE statement 
+a := a + 1; 
+CONTINUE; 
+END IF; 
+END LOOP; 
+END; 
+/
+
+
+
+-------------------------------
+
+DECLARE 
+a number(2) := 10; 
+BEGIN 
+<<loopstart>>
+-- while loop execution 
+WHILE a < 20 LOOP 
+dbms_output.put_line ('value of a: ' || a); 
+a := a + 1; 
+IF a = 15 THEN a := a + 1; 
+GOTO loopstart; 
+END IF; 
+END LOOP; 
+END;
+/
+
+
+---STRINGS-----
+DECLARE 
+name varchar2(20); 
+company varchar2(30);
+introduction clob; c
+hoice char(1); 
+BEGIN name := 'John Smith'; 
+company := 'Infotech'; 
+introduction := ' Hello! I''m John Smith from Infotech.'; 
+choice := 'y'; 
+IF choice = 'y' THEN dbms_output.put_line(name); 
+dbms_output.put_line(company); 
+dbms_output.put_line(introduction); 
+END IF; 
+END; 
+/
+
+
+
+---------------------
+
+DECLARE 
+greetings varchar2(11) := 'hello world'; 
+BEGIN dbms_output.put_line(UPPER(greetings)); 
+dbms_output.put_line(LOWER(greetings)); 
+dbms_output.put_line(INITCAP(greetings)); 
+/* retrieve the first character in the string */ 
+dbms_output.put_line ( SUBSTR (greetings, 1, 1)); 
+/* retrieve the last character in the string */ 
+dbms_output.put_line ( SUBSTR (greetings, -1, 1)); 
+/* retrieve five characters, starting from the seventh position. */ 
+dbms_output.put_line ( SUBSTR (greetings, 7, 5)); 
+/* retrieve the remainder of the string, starting from the second position. */ 
+dbms_output.put_line ( SUBSTR (greetings, 2)); 
+/* find the location of the first "e" */ 
+dbms_output.put_line ( INSTR (greetings, 'e')); 
+END; 
+/
+
+
+
+---------------
+
+DECLARE 
+greetings varchar2(30) := '......Hello World.....'; 
+BEGIN 
+dbms_output.put_line(RTRIM(greetings,'.')); 
+dbms_output.put_line(LTRIM(greetings, '.')); 
+dbms_output.put_line(TRIM( '.' from greetings)); 
+END; 
+/
+
+
+
+-------Procedures------
+
+CREATE OR REPLACE PROCEDURE greetings 
+AS 
+BEGIN 
+dbms_output.put_line('Hello World!'); 
+END; 
+/
+
+
+----------------
+
+DECLARE 
+a number; 
+b number; 
+c number; 
+PROCEDURE findMin(x IN number, y IN number, z OUT number) IS 
+BEGIN 
+IF x < y THEN 
+z:= x; 
+ELSE 
+z:= y; 
+END IF; 
+END; 
+BEGIN 
+a:= 23; 
+b:= 45; 
+findMin(a, b, c); 
+dbms_output.put_line(' Minimum of (23, 45) : ' || c); 
+END; 
+/
+
+
+DECLARE 
+a number; 
+PROCEDURE squareNum(x IN OUT number) IS 
+BEGIN 
+x := x * x;
+END; 
+BEGIN a:= 23; 
+squareNum(a); 
+dbms_output.put_line(' Square of (23): ' || a); 
+END; 
+/
+
+
+-------FUNCTIONS-----------
+
+DECLARE 
+a number; 
+b number; 
+c number; 
+FUNCTION findMax(x IN number, y IN number) 
+RETURN number 
+IS 
+z number; 
+BEGIN 
+IF x > y THEN z:= x; 
+ELSE 
+Z:= y; 
+END IF; 
+RETURN z; 
+END; 
+BEGIN a:= 23; 
+b:= 45; 
+c := findMax(a, b); 
+dbms_output.put_line(' Maximum of (23,45): ' || c); 
+END; 
+/
+
+
+
+----------------------
+
+DECLARE 
+num number; 
+factorial number; 
+FUNCTION fact(x number) 
+RETURN number 
+IS 
+f number; 
+BEGIN 
+IF x=0 THEN 
+f := 1; 
+ELSE f := x * fact(x-1); 
+END IF; 
+RETURN f; 
+END; 
+BEGIN 
+num:= 6; 
+factorial := fact(num); 
+dbms_output.put_line(' Factorial '|| num || ' is ' || factorial); 
+END; 
+/
+
+
+
+-----------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
