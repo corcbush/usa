@@ -1,0 +1,85 @@
+create or replace function net(p_salary in number,p_comm in number) return number is
+begin 
+return p_salary-p_salary*nhl(p_comm,0);
+end;
+/
+select last_name,salary,commision_pct, net(p_salary=>salary,p_comm=>commision-pct) as "Net Salary " from employess;
+
+..........
+
+create or replace check(n1 number ,n2 number, n3 number) return varchar2
+is
+begin
+if (n1*n1+n2dd) then return 'true';
+elsif(n1*n1+n2dd) then return 'true';
+elsif(n1*n1+n2dd) then return 'true';
+endif;
+return 'false';
+end;
+
+/ select check(3.4.5) from dual;
+
+
+...................
+declare 
+m  number(3);
+n  number (3);
+begin
+m:=2;
+loop
+n:=2;
+loop
+exit when (mod(m,n)=0  and (m=n)) 
+n:=n+1;
+end loop;
+if (m=n) then 
+dbms_output.put_line(n||'is simple')
+ end if;
+m:=m+1;
+exit when  m=50;
+end loop;
+end ;
+....................
+
+'''
+
+declare 
+v_row constant number:=7;
+v_column constant number:=7;
+begin
+for i in 1..v_row
+loop
+for j in 1..v_column
+loop
+if (i=j or j=v_cloumn+i-1) then dbms_output.put_line('*');
+else dbms_output.put_line('');
+end if;end loop;
+dbms_output.put_line('');
+end loop;
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
