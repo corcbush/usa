@@ -1,0 +1,103 @@
+---Single-row functions
+select last_name, upper(last_name)
+, lower(last_name) 
+, initcap('khazar univer')
+from employees;
+
+select last_name, substr(last_name, 7) 
+,substr(last_name, 3, 3), substr(last_name, 1, 2)
+,substr(last_name, -2)
+from employees;
+
+select phone_number, 
+substr(phone_number, 1,3)||'***'||substr(phone_number, -3) mask  
+from employees;
+
+select last_name, instr(last_name, 'e',1,2) 
+from employees;
+
+select last_name, lpad(last_name, 15, '*')
+,rpad(last_name, 15, '*')
+from employees;
+
+select trim('   abc qwerty               ')  from employees;
+select rtrim('   abc qwerty               ', ' ')  from employees;
+select ltrim('   abc qwerty               ', ' ')  from employees;
+select rtrim('   abc qwerty               ', 'a')  from employees;
+select rtrim('   abc qwerty       aaa', 'a')  from employees;
+select rtrim('   abc qwerty       aabaaa', 'a')  from employees;
+
+select replace(' abc qwerty', 'a', '#') as "Replace" from employees;
+select replace(' abc qwerty', 'c q', '*') as "Replace" from employees;
+select replace(' abc qwebrtby', 'b', '*') as "Replace" from employees;
+
+select translate('qwertokhuio', 'euio', '*#@!') 
+as "Translate" 
+from employees;
+
+select phone_number, translate(phone_number, '*0123456789', '*') 
+as "Translate" 
+from employees;
+
+select  salary/employee_id
+,round(salary/employee_id)
+,round(salary/employee_id, 2)
+,round(-salary/employee_id, 2)
+,round(salary/employee_id, -2)
+from employees;
+
+select  salary/employee_id
+,trunc(salary/employee_id)
+,trunc(salary/employee_id, 2)
+,trunc(-salary/employee_id, 2)
+,trunc(salary/employee_id, -2)
+from employees;
+
+select salary, mod(salary, 1000)  from employees;
+select  mod(9, 2), mod(10, 2)  from employees;
+
+select sysdate from dual;
+select sysdate + 2 from dual;
+
+select add_months(sysdate, 24)  from dual;
+
+select hire_date, months_between(sysdate, hire_date) from employees;
+
+select hire_date, last_day(hire_date) from employees;
+
+select last_name, hire_date, last_day(hire_date) from employees
+where hire_date = last_day(hire_date)
+;
+select next_day(sysdate, 'sun') from dual;
+
+select next_day(sysdate-1, 'wed') from dual;
+
+select to_char(sysdate, 'dd-mon-yyyy hh12:mi:ss AM')
+,round(sysdate), round(sysdate, 'day')
+, round(sysdate, 'month')
+,round(sysdate, 'year')
+from dual;
+
+-------------------------------------------
+
+select hire_date, to_char(hire_date, 'dd.mm.yyyy') from employees;
+select sysdate, to_char(sysdate, 'd')
+, to_char(sysdate, 'dd')
+, to_char(sysdate, 'ddd')
+from dual;
+
+select sysdate, to_char(sysdate, 'yyyymmdd')
+, to_char(sysdate, 'mm-yyyy')
+, to_char(sysdate, 'dd.mm')
+from dual;
+
+select last_name, hire_date, to_char(hire_date, 'mmyyyy') 
+from employees
+where to_char(hire_date, 'mmyyyy') = '022006'
+;
+
+
+
+
+
+select last_name, length(last_name) from employees;
